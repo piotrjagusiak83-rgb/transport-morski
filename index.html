@@ -1,0 +1,317 @@
+<!doctype html>
+<html lang="pl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Transport morski w Polsce: podsumowanie projektu w 9 punktach. Politechnika Łódzka.">
+<meta name="theme-color" content="#eef2f5">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d1926'/%3E%3Cpath d='M12 38h40l-6 12H18z' fill='%23fff'/%3E%3Cpath d='M22 36V20h14v16M36 26h8v10' fill='none' stroke='%23fff' stroke-width='4'/%3E%3C/svg%3E">
+<title>Transport morski w Polsce</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700;800&family=Manrope:wght@500;600;700&family=JetBrains+Mono:wght@500&display=swap">
+<style>
+/* Layout: one phone-width column like a ship's logbook; a sticky strip of the 9 points; the diorama with a day / digital-twin slider on top. */
+:root {
+  --paper: #eef2f5; --card: #ffffff; --ink: #0d1926; --ink2: #44546a; --line: rgba(13, 25, 38, .14);
+  --blue: #1746ff; --orange: #c2410c; --sea: #2a6fdb; --road: #e8742f; --rail: #5b6b7e; --rest: #c3cbd4;
+  --chip: rgba(13, 25, 38, .06); --navy: #071224;
+  --disp: 'Sora', 'Segoe UI', Arial, sans-serif; --body: 'Manrope', 'Segoe UI', Arial, sans-serif; --mono: 'JetBrains Mono', Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --paper: #07101d; --card: #0e1a2b; --ink: #e8f0fa; --ink2: #a8b7c9; --line: rgba(160, 190, 230, .18);
+  --blue: #7aa2ff; --orange: #ff9a5c; --sea: #5b9bff; --road: #ff9a5c; --rail: #93a3b6; --rest: #3b4a5c; --chip: rgba(160, 190, 230, .09); color-scheme: dark } }
+:root[data-theme="dark"] {
+  --paper: #07101d; --card: #0e1a2b; --ink: #e8f0fa; --ink2: #a8b7c9; --line: rgba(160, 190, 230, .18);
+  --blue: #7aa2ff; --orange: #ff9a5c; --sea: #5b9bff; --road: #ff9a5c; --rail: #93a3b6; --rest: #3b4a5c; --chip: rgba(160, 190, 230, .09); color-scheme: dark }
+* { box-sizing: border-box; }
+body { background: var(--paper); color: var(--ink); font: 500 16px/1.55 var(--body); -webkit-font-smoothing: antialiased; }
+.wrap { max-width: 640px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); }
+a { color: var(--blue); }
+a:focus-visible, button:focus-visible, input:focus-visible { outline: 3px solid var(--blue); outline-offset: 3px; }
+.eyebrow { font: 500 12px/1.4 var(--mono); letter-spacing: .1em; text-transform: uppercase; color: var(--ink2); }
+header { padding-block: 28px 18px; }
+h1 { font: 800 clamp(40px, 12vw, 64px)/.98 var(--disp); letter-spacing: -.04em; margin: 10px 0 12px; text-wrap: balance; }
+.lead { font-size: 17px; color: var(--ink2); margin: 0; text-wrap: pretty; }
+.names { margin-top: 14px; font: 500 13px/1.4 var(--mono); color: var(--ink2); }
+
+/* diorama: day / digital twin */
+.compare { position: relative; margin-top: 18px; border-radius: 18px; overflow: hidden; aspect-ratio: 3 / 2; max-width: 100%; background: var(--navy); touch-action: pan-y; }
+.compare img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; user-select: none; -webkit-user-drag: none; }
+.compare .twin { clip-path: inset(0 0 0 var(--cut, 55%)); }
+.compare .bar { position: absolute; top: 0; bottom: 0; left: var(--cut, 55%); width: 3px; margin-left: -1.5px; background: #6fe0ff; box-shadow: 0 0 14px 3px rgba(80, 210, 255, .7); pointer-events: none; }
+.compare .knob { position: absolute; top: 50%; left: var(--cut, 55%); width: 44px; height: 44px; margin: -22px 0 0 -22px; border-radius: 50%; background: #ffffff; color: #071224; display: grid; place-items: center; box-shadow: 0 4px 16px rgba(0, 0, 0, .35); pointer-events: none; }
+.compare .tagl, .compare .tagr { position: absolute; bottom: 10px; font: 500 11px/1 var(--mono); letter-spacing: .08em; text-transform: uppercase; padding: 7px 9px; border-radius: 8px; pointer-events: none; }
+.compare .tagl { left: 10px; background: rgba(255, 255, 255, .9); color: #0d1926; }
+.compare .tagr { right: 10px; background: rgba(7, 18, 36, .85); color: #8fe6ff; }
+.compare input { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+.cap { font-size: 13px; color: var(--ink2); margin: 8px 2px 0; }
+
+/* key numbers */
+.kpis { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 22px; }
+.kpi { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px 14px 12px; }
+.kpi b { display: block; font: 700 clamp(22px, 6.6vw, 30px)/1.05 var(--disp); white-space: nowrap; letter-spacing: -.03em; color: var(--blue); font-variant-numeric: tabular-nums; }
+.kpi span { display: block; margin-top: 6px; font-size: 13.5px; line-height: 1.35; color: var(--ink2); }
+
+/* sticky strip of the 9 points */
+nav.pts { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 5; background: var(--paper); margin-top: 24px; border-bottom: 1px solid var(--line); }
+nav.pts .row { display: flex; gap: 6px; overflow-x: auto; padding-block: 10px; scrollbar-width: none; }
+nav.pts .row::-webkit-scrollbar { display: none; }
+nav.pts a { flex: none; min-width: 44px; height: 44px; display: grid; place-items: center; border-radius: 12px; background: var(--chip); color: var(--ink); text-decoration: none; font: 700 15px/1 var(--disp); padding: 0 12px; }
+nav.pts a.on { background: var(--ink); color: var(--paper); }
+body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 10; background: var(--paper); }
+
+/* points */
+section.pt { padding-block: 26px 6px; scroll-margin-top: 80px; }
+.pt .num { font: 500 12px/1 var(--mono); letter-spacing: .1em; color: var(--orange); }
+.pt h2 { font: 700 26px/1.12 var(--disp); letter-spacing: -.025em; margin: 6px 0 12px; text-wrap: balance; }
+.big { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; margin: 4px 0 10px; }
+.big b { font: 800 44px/1 var(--disp); letter-spacing: -.04em; color: var(--blue); font-variant-numeric: tabular-nums; }
+.big span { font-size: 15px; color: var(--ink2); flex: 1 1 160px; min-width: 0; }
+ul.pts-list { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+ul.pts-list li { position: relative; padding-left: 18px; text-wrap: pretty; }
+ul.pts-list li::before { content: ""; position: absolute; left: 2px; top: .62em; width: 7px; height: 7px; border-radius: 2px; background: var(--orange); }
+sup.rf { font: 500 10px/0 var(--mono); vertical-align: .6em; margin-left: 2px; }
+sup.rf a { text-decoration: none; color: var(--blue); padding: 2px; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 2px 0 12px; }
+.chips span { font-size: 13.5px; padding: 6px 10px; border-radius: 999px; background: var(--chip); }
+.swot { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+.swot div { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 10px 12px; font-size: 14px; line-height: 1.4; min-width: 0; }
+.swot b { display: block; font: 500 11px/1.3 var(--mono); letter-spacing: .08em; text-transform: uppercase; color: var(--orange); margin-bottom: 4px; }
+
+/* charts */
+.chart { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 14px; margin: 6px 0 12px; }
+.chart h3 { font: 600 14px/1.3 var(--body); margin: 0 0 10px; color: var(--ink2); }
+.stack { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 8px 10px; align-items: center; }
+.stack .lab { font: 500 12px/1 var(--mono); color: var(--ink2); }
+.stack .bar { display: flex; height: 30px; border-radius: 6px; overflow: hidden; gap: 2px; background: var(--card); }
+.stack .bar i { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; margin-top: 12px; font-size: 13px; color: var(--ink2); }
+.legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+.depth svg { width: 100%; height: auto; display: block; }
+.depth text { font-family: var(--mono); }
+
+.cta { display: grid; gap: 10px; margin: 30px 0 8px; padding: 18px; border-radius: 18px; background: var(--navy); color: #e8f0fa; }
+.cta h2 { font: 700 22px/1.15 var(--disp); margin: 0; letter-spacing: -.02em; }
+.cta p { margin: 0; color: #a8b7c9; font-size: 14.5px; }
+.cta a.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 18px; border-radius: 12px; background: #6fe0ff; color: #071224; font: 700 16px/1 var(--body); text-decoration: none; }
+details.src { margin: 26px 0 40px; border-top: 1px solid var(--line); padding-top: 14px; }
+details.src summary { cursor: pointer; font: 700 18px/1.3 var(--disp); min-height: 44px; display: flex; align-items: center; }
+details.src ol { padding-left: 26px; margin: 8px 0 0; font-size: 13.5px; line-height: 1.45; color: var(--ink2); display: grid; gap: 6px; }
+details.src li { overflow-wrap: anywhere; }
+footer { font-size: 12.5px; color: var(--ink2); padding-block: 0 32px; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+html { scroll-behavior: smooth; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+<header>
+  <div class="eyebrow">Plakat · Temat IV · Politechnika Łódzka</div>
+  <h1>Transport morski w&nbsp;Polsce</h1>
+  <p class="lead">Cały nasz projekt w 9 punktach, od definicji po inteligentny port.</p>
+  <div class="names">Kuba Cychner · Piotr Jagusiak</div>
+
+  <div class="compare" id="cmp" style="--cut:55%">
+    <img src="img/day.jpg" alt="Makieta portu kontenerowego w świetle dziennym: statki, suwnice, plac kontenerowy, prom i turbiny wiatrowe" width="1350" height="900">
+    <img class="twin" src="img/twin.jpg" alt="Ta sama makieta jako cyfrowy bliźniak: siatka hologramu i zasięg radaru VTS nad zatoką" width="1350" height="900">
+    <div class="bar"></div>
+    <div class="knob" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></div>
+    <span class="tagl">Port dziś</span><span class="tagr">Cyfrowy bliźniak</span>
+    <label for="cut" class="eyebrow" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Przesuń, aby porównać port z cyfrowym bliźniakiem</label>
+    <input id="cut" type="range" min="0" max="100" value="55" step="1">
+  </div>
+  <p class="cap">Przesuń palcem: po lewej makieta portu, po prawej jej cyfrowy bliźniak. Makieta z naszej prezentacji 3D (opracowanie własne).</p>
+
+  <div class="kpis">
+    <div class="kpi"><b>ok. 80%</b><span>światowego handlu (wolumenowo) płynie morzem<sup class="rf"><a href="#s2">2</a></sup></span></div>
+    <div class="kpi"><b>128 mln t</b><span>przeładowały polskie porty w 2025 r., +3,1%<sup class="rf"><a href="#s6">6</a></sup></span></div>
+    <div class="kpi"><b>3,9 mln TEU</b><span>rekord kontenerów w polskich portach w 2025 r.<sup class="rf"><a href="#s7">7</a></sup></span></div>
+    <div class="kpi"><b>10,8%</b><span>pracy przewozowej w Polsce wykonuje morze; średnia UE: 67%<sup class="rf"><a href="#s8">8</a></sup></span></div>
+  </div>
+</header>
+</div>
+
+<nav class="pts" aria-label="Punkty projektu">
+  <div class="wrap"><div class="row" id="ptsnav">
+    <a href="#p1">1</a><a href="#p2">2</a><a href="#p3">3</a><a href="#p4">4</a><a href="#p5">5</a><a href="#p6">6</a><a href="#p7">7</a><a href="#p8">8</a><a href="#p9">9</a>
+  </div></div>
+</nav>
+
+<main class="wrap">
+<section class="pt" id="p1">
+  <div class="num">01 · Definicja i cechy</div>
+  <h2>Statkiem, po morzu, port–port</h2>
+  <p style="margin:0 0 12px">Transport morski to przewóz ładunków i pasażerów statkami w rejsach odbywanych w całości lub częściowo po morzu.<sup class="rf"><a href="#s1">1</a></sup></p>
+  <div class="chips"><span>masowość</span><span>niska prędkość, ok. 18 węzłów</span><span>port–port</span><span>żegluga liniowa i trampowa</span><span>specjalizacja statków</span><span>wspólne zasady IMO</span></div>
+  <div class="big"><b>≈12 000</b><span>ciężarówek zastępuje jeden kontenerowiec klasy MSC Irina (24 346 TEU)<sup class="rf"><a href="#s3">3</a></sup></span></div>
+</section>
+
+<section class="pt" id="p2">
+  <div class="num">02 · Zalety, wady, szanse, zagrożenia</div>
+  <h2>Tanio i daleko, ale wolno</h2>
+  <div class="swot">
+    <div><b>Zalety</b>Najniższy koszt na długich trasach, zasięg całego świata, każdy rodzaj ładunku.</div>
+    <div><b>Wady</b>Długi czas rejsu; 1478 kontenerów utraconych w 2025 r.<sup class="rf"><a href="#s4">4</a></sup>; ok. 3% emisji gazów cieplarnianych<sup class="rf"><a href="#s5">5</a></sup>.</div>
+    <div><b>Szanse</b>Wzrost przeładunków (+3,1% w 2025 r.)<sup class="rf"><a href="#s6">6</a></sup>, nowy terminal T3 w Gdańsku<sup class="rf"><a href="#s9">9</a></sup>, rola hubu dla regionu.</div>
+    <div><b>Zagrożenia</b>Niski udział morza (10,8%)<sup class="rf"><a href="#s8">8</a></sup>, wahania obrotów, konkurencja Hamburga, słabe zaplecze kolejowe.</div>
+  </div>
+</section>
+
+<section class="pt" id="p3">
+  <div class="num">03 · Statystyki</div>
+  <h2>W UE 2/3 wozi morze, w Polsce 2/3 wozi droga</h2>
+  <div class="chart" role="img" aria-label="Udział gałęzi transportu w pracy przewozowej w 2024 r. UE: morski 67,0%, drogowy 25,7%, kolejowy 5,4%, pozostałe 1,9%. Polska: morski 10,8%, drogowy 67,7%, kolejowy 21,0%, pozostałe 0,5%.">
+    <h3>Praca przewozowa (tonokilometry), 2024 r.<sup class="rf"><a href="#s8">8</a></sup></h3>
+    <div class="stack">
+      <span class="lab">UE</span><div class="bar"><i style="width:67%;background:var(--sea)"></i><i style="width:25.7%;background:var(--road)"></i><i style="width:5.4%;background:var(--rail)"></i><i style="width:1.9%;background:var(--rest)"></i></div>
+      <span class="lab">PL</span><div class="bar"><i style="width:10.8%;background:var(--sea)"></i><i style="width:67.7%;background:var(--road)"></i><i style="width:21%;background:var(--rail)"></i><i style="width:.5%;background:var(--rest)"></i></div>
+    </div>
+    <div class="legend"><span><i style="background:var(--sea)"></i>morski: UE 67,0%, PL 10,8%</span><span><i style="background:var(--road)"></i>drogowy: UE 25,7%, PL 67,7%</span><span><i style="background:var(--rail)"></i>kolejowy: UE 5,4%, PL 21,0%</span><span><i style="background:var(--rest)"></i>pozostałe</span></div>
+  </div>
+  <ul class="pts-list">
+    <li>Polska jest przedostatnia (20. na 21) wśród nadmorskich krajów UE; niżej tylko Słowenia.<sup class="rf"><a href="#s8">8</a></sup></li>
+    <li>Gdańsk: 2,8 mln TEU w 2025 r.; Rotterdam 14,2 mln, Szanghaj 55,1 mln.<sup class="rf"><a href="#s9">9</a></sup></li>
+    <li>Od 2005 r. ładunki w polskich portach wzrosły 2,3 raza, a kontenery 6 razy.<sup class="rf"><a href="#s6">6</a></sup></li>
+  </ul>
+</section>
+
+<section class="pt" id="p4">
+  <div class="num">04 · Infrastruktura liniowa</div>
+  <h2>Głębokość decyduje o wielkości statku</h2>
+  <div class="chart depth">
+    <h3>Głębokość torów i nabrzeży pod poziomem morza<sup class="rf"><a href="#s11">11</a>,<a href="#s12">12</a>,<a href="#s9">9</a></sup></h3>
+    <svg viewBox="0 0 340 200" role="img" aria-label="Głębokość: Elbląg 5 m, Szczecin 12,5 m, Gdynia 15,5 m, Gdańsk T3 17,5 m. Limit Cieśnin Duńskich: 15,4 m zanurzenia.">
+      <g font-size="11" fill="var(--ink2)" text-anchor="middle"><text x="50" y="24">Elbląg</text><text x="128" y="24">Szczecin</text><text x="206" y="24">Gdynia</text><text x="284" y="24">Gdańsk T3</text></g>
+      <line x1="10" y1="34" x2="330" y2="34" stroke="var(--ink2)" stroke-width="1.5"/>
+      <g fill="var(--sea)"><rect x="22" y="35" width="56" height="44" rx="3"/><rect x="100" y="35" width="56" height="110" rx="3"/><rect x="178" y="35" width="56" height="136" rx="3"/><rect x="256" y="35" width="56" height="154" rx="3"/></g>
+      <line x1="10" y1="169.5" x2="330" y2="169.5" stroke="var(--orange)" stroke-width="2" stroke-dasharray="6 4"/>
+      <g font-size="13" font-weight="700" fill="#ffffff" text-anchor="middle"><text x="50" y="72">5 m</text><text x="128" y="138">12,5 m</text><text x="206" y="160">15,5 m</text><text x="284" y="182">17,5 m</text></g>
+    </svg>
+    <div class="legend"><span><i style="background:var(--sea)"></i>głębokość toru lub nabrzeża</span><span><i style="background:var(--orange);height:3px;vertical-align:3px"></i>15,4 m: limit zanurzenia w Cieśninach Duńskich</span></div>
+  </div>
+  <ul class="pts-list">
+    <li>Brama Bałtyku to Cieśniny Duńskie: wpłyną statki do 15,4 m zanurzenia (Baltimax).<sup class="rf"><a href="#s11">11</a></sup></li>
+    <li>Gdańsk przyjmie każdy statek, który zmieści się w cieśninach.</li>
+  </ul>
+</section>
+
+<section class="pt" id="p5">
+  <div class="num">05 · Infrastruktura punktowa</div>
+  <h2>Cztery główne porty</h2>
+  <div class="big"><b>ok. 59%</b><span>ładunków polskich portów obsługuje Gdańsk (2025 r.)<sup class="rf"><a href="#s10">10</a></sup></span></div>
+  <ul class="pts-list">
+    <li><strong>Gdańsk:</strong> Baltic Hub, największy terminal kontenerowy na Bałtyku, do 4,5 mln TEU rocznie.<sup class="rf"><a href="#s9">9</a></sup></li>
+    <li><strong>Gdynia:</strong> Nabrzeże Helskie o głębokości 15,5 m dla statków do 400 m.<sup class="rf"><a href="#s12">12</a></sup></li>
+    <li><strong>Świnoujście:</strong> Terminal LNG, 8,3 mld m³ gazu rocznie.<sup class="rf"><a href="#s13">13</a></sup></li>
+    <li><strong>Szczecin:</strong> port w głębi lądu, tor wodny 62 km, 12,5 m.<sup class="rf"><a href="#s12">12</a></sup></li>
+  </ul>
+</section>
+
+<section class="pt" id="p6">
+  <div class="num">06 · Najważniejsze środki transportu</div>
+  <h2>Każdy ładunek ma swój statek</h2>
+  <div class="big"><b>24 346 TEU</b><span>mieści największy kontenerowiec, MSC Irina (400 m); takie statki zawijają do Gdańska<sup class="rf"><a href="#s3">3</a>,<a href="#s9">9</a></sup></span></div>
+  <ul class="pts-list">
+    <li><strong>Kontenerowiec</strong> (TEU), <strong>masowiec</strong> i <strong>zbiornikowiec</strong> (DWT), <strong>gazowiec LNG</strong> (m³), <strong>prom ro-pax</strong> (metry pasa), <strong>samochodowiec</strong> (CEU).</li>
+    <li>Flota świata: ok. 116 tys. statków, 2,5 mld DWT.<sup class="rf"><a href="#s14">14</a></sup></li>
+  </ul>
+</section>
+
+<section class="pt" id="p7">
+  <div class="num">07 · Przewoźnicy i spedytorzy</div>
+  <h2>Kilku gigantów i polskie nisze</h2>
+  <div class="big"><b>85%</b><span>światowej floty kontenerowej ma 10 największych armatorów; sam MSC 21,6%<sup class="rf"><a href="#s15">15</a></sup></span></div>
+  <ul class="pts-list">
+    <li>Polscy armatorzy: PŻM (52 statki, masowce), Chipolbrok (ładunki ciężkie), POLSCA Baltic Ferries (11 promów).<sup class="rf"><a href="#s16">16</a></sup></li>
+    <li>Tylko 15,7% statków polskich armatorów pływa pod polską banderą.<sup class="rf"><a href="#s17">17</a></sup></li>
+    <li>Lider spedycji morskiej w Polsce: Ligentia Poland, 779 mln zł przychodu w 2025 r.<sup class="rf"><a href="#s18">18</a></sup></li>
+  </ul>
+</section>
+
+<section class="pt" id="p8">
+  <div class="num">08 · Inteligentne rozwiązania</div>
+  <h2>Port, w którym dane płyną szybciej niż ładunki</h2>
+  <div class="big"><b>40 s</b><span>trwa samoobsługowa odprawa ciężarówki na bramie z OCR (ręcznie 4–5 min)<sup class="rf"><a href="#s20">20</a></sup></span></div>
+  <ul class="pts-list">
+    <li>Terminal T3 w Gdańsku: 20 suwnic placowych sterowanych zdalnie z centrum operacyjnego.<sup class="rf"><a href="#s19">19</a></sup></li>
+    <li>Polski PCS: wspólna platforma wymiany danych portów Gdańsk, Gdynia i Szczecin–Świnoujście.<sup class="rf"><a href="#s21">21</a></sup></li>
+    <li>VTS Zatoka Gdańska: 6 radarów brzegowych i 3 portowe nadzorują ruch statków.<sup class="rf"><a href="#s22">22</a></sup></li>
+    <li>Cyfrowy bliźniak Portu Gdynia i HydroDron do pomiarów dna.<sup class="rf"><a href="#s23">23</a></sup></li>
+    <li>Gdynia: pierwsza w Polsce instalacja zasilania statków z lądu (OPS), 3,5 MW.<sup class="rf"><a href="#s24">24</a></sup></li>
+  </ul>
+</section>
+
+<section class="pt" id="p9">
+  <div class="num">09 · Ciekawostki</div>
+  <h2>Rekordy z polskiego morza</h2>
+  <div class="big"><b>399 m</b><span>ma MSC Venice, największy statek w historii Portu Gdynia (24.07.2026)<sup class="rf"><a href="#s25">25</a></sup></span></div>
+  <ul class="pts-list">
+    <li>Suwnica w Baltic Hub ma 96 m, a z podniesionym wysięgnikiem 140 m.<sup class="rf"><a href="#s26">26</a></sup></li>
+    <li>Po Bałtyku pływa naraz ok. 1500 dużych statków.<sup class="rf"><a href="#s27">27</a></sup></li>
+    <li>Baltic Power: 76 turbin, ok. 1,2 GW; pierwszy prąd w lipcu 2026 r.<sup class="rf"><a href="#s28">28</a></sup></li>
+  </ul>
+</section>
+
+<section class="cta" aria-labelledby="cta-h">
+  <h2 id="cta-h">Makieta 3D portu</h2>
+  <p>Interaktywna prezentacja z punktów 8–9: port, cyfrowy bliźniak i ciekawostki. Najlepiej działa na komputerze; na telefonie może być wolniejsza.</p>
+  <a class="btn" href="makieta/">Otwórz makietę 3D <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
+</section>
+
+<details class="src" id="zrodla">
+  <summary>Źródła (28)</summary>
+  <ol>
+    <li id="s1">Eurostat, Maritime transport (mar): metadane i definicje, 2025.</li>
+    <li id="s2">UNCTAD, Review of Maritime Transport 2024 i 2025.</li>
+    <li id="s3">Trans.info, „Największy kontenerowiec świata zasilił flotę MSC” (MSC Irina, 24 346 TEU), 17.03.2023.</li>
+    <li id="s4">World Shipping Council, Containers Lost at Sea – 2026 Update, 2026.</li>
+    <li id="s5">IMO, Fourth IMO Greenhouse Gas Study 2020.</li>
+    <li id="s6">GUS, Gospodarka morska w Polsce w 2025 r., 28.04.2026 (oraz edycje za 2023 i 2024 r.); Eurostat, mar_mg_aa_cwh i mar_mg_am_cvh (2005–2024).</li>
+    <li id="s7">Actia Forum dla Pomorskiego Urzędu Marszałkowskiego, Roczny monitoring polskich portów 2025, 2026.</li>
+    <li id="s8">Eurostat, Modal split of freight transport (tran_hv_ms_frmod), dane za 2024 r.</li>
+    <li id="s9">Baltic Hub, „The T3 project at Baltic Hub is officially completed”, 17.11.2025; podsumowanie roku 2025, 22.01.2026; Container News, Rotterdam 2025, 27.02.2026; Maritime Executive, Shanghai 2025, 13.01.2026.</li>
+    <li id="s10">Trans.info, „Polskie porty morskie urosły w 2025 r.”, 4.05.2026.</li>
+    <li id="s11">Wikipedia, Baltimax (15,4 m zanurzenia, 65 m prześwitu).</li>
+    <li id="s12">Port Gdynia, Nabrzeże Helskie (–15,5 m), 17.02.2026; Inżynier Budownictwa, tor Świnoujście–Szczecin 12,5 m, 12.05.2022; PAP/Bankier.pl, Elbląg 5 m, 10.06.2026.</li>
+    <li id="s13">GAZ-SYSTEM, rozbudowa Terminalu LNG w Świnoujściu (8,3 mld m³), 22.01.2025.</li>
+    <li id="s14">UNCTADstat, Maritime transport insights (flota świata 1.01.2026).</li>
+    <li id="s15">Alphaliner PublicTop100, kwiecień 2026.</li>
+    <li id="s16">Polska Żegluga Morska (polsteam.com); MarinePoland.com, Chipolbrok, 18.06.2026; Baird Maritime, POLSCA Baltic Ferries, 7.04.2026.</li>
+    <li id="s17">GUS, Gospodarka morska w Polsce w 2024 r., 28.04.2025.</li>
+    <li id="s18">Dziennik Gazeta Prawna, Ranking TSL 2026: spedycja morska, 26.06.2026.</li>
+    <li id="s19">Ship Technology, „Baltic Hub T3 Container Terminal, Poland”; Port Gdańsk, Baltic Hub Container Terminal (dostęp 9.11.2026).</li>
+    <li id="s20">K. Moszyk, M. Deja, M. Dobrzyński, Automation of the Road Gate Operations Process at the Container Terminal: DCT Gdańsk, Sustainability 13 (2021) 6291.</li>
+    <li id="s21">Portal Stoczniowy, wywiad z prezesem Polskiego PCS, 2.11.2020; Port Gdańsk, Joint Digitalisation Plan for Polish Ports 2026–2028, 25.06.2026.</li>
+    <li id="s22">Urząd Morski w Gdyni, Systemy wspomagające VTS Zatoka Gdańska (dostęp 9.11.2026).</li>
+    <li id="s23">MarinePoland.com, cyfrowy bliźniak Portu Gdynia, 5.08.2022; HydroDron, 1.10.2019.</li>
+    <li id="s24">ESPO, First onshore power supply (OPS) charging station in Poland at the Port of Gdynia, 19.05.2021.</li>
+    <li id="s25">Gazeta Morska / DailyMare, „399 metres at the Hel Quay” (MSC Venice), 25.07.2026.</li>
+    <li id="s26">Container News, Baltic Hub receives three additional STS cranes, 13.03.2025.</li>
+    <li id="s27">XYZ.pl, M. Szcześniewski, „Polskie radary i satelity nie wystarczą. Bałtyk wymaga nowego systemu”, 9.09.2026.</li>
+    <li id="s28">GlobEnergia.pl, „Pierwsza energia z polskiego offshore trafiła do sieci! Baltic Power…”, 10.07.2026.</li>
+  </ol>
+</details>
+</main>
+<footer class="wrap">Kuba Cychner · Piotr Jagusiak · Temat IV „Transport morski w Polsce”. Makieta, rendery i wykresy: opracowanie własne na podstawie źródeł powyżej.</footer>
+
+<script>
+(() => {
+  const cmp = document.getElementById('cmp'), cut = document.getElementById('cut');
+  const set = v => cmp.style.setProperty('--cut', v + '%');
+  cut.addEventListener('input', () => set(cut.value));
+  // highlight the point currently on screen in the sticky strip
+  const links = [...document.querySelectorAll('#ptsnav a')];
+  const secs = links.map(a => document.querySelector(a.getAttribute('href')));
+  const io = new IntersectionObserver(es => {
+    es.forEach(e => { if (e.isIntersecting) { const i = secs.indexOf(e.target); links.forEach((a, k) => a.classList.toggle('on', k === i)); const a = links[i]; if (a && a.scrollIntoView) a.parentElement.scrollTo({ left: a.offsetLeft - 60, behavior: 'smooth' }); } });
+  }, { rootMargin: '-40% 0px -55% 0px' });
+  secs.forEach(s => s && io.observe(s));
+  // a source link opens the collapsed list first
+  document.querySelectorAll('sup.rf a').forEach(a => a.addEventListener('click', () => { const d = document.getElementById('zrodla'); if (d) d.open = true; }));
+})();
+</script>
+
+</body>
+</html>
